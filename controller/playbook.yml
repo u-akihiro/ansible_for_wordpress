@@ -1,0 +1,40 @@
+- hosts: webservers
+  remote_user: root
+  become: yes
+  tasks:
+    - name: install apache2
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+      notify:
+        - restart apache
+    - name: install php
+      apt:
+        name: libapache2-mod-php
+        state: present
+      notify:
+        - restart apache
+    - name: install debconf-utils
+      apt:
+        name: debconf-utils
+        state: present
+    - name: install mysql
+      apt:
+        name: mysql-server
+        state: present
+        update_cache: yes
+    - name: install mysql client
+      apt:
+        name: mysql-client
+        state: present
+        update_cache: yes
+  handlers:
+    - name: restart apache
+      service:
+        name: apache2
+        state: restarted
+    - name: restart mysql server
+      service:
+        name: mysql
+        state: restarted
