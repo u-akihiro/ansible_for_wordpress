@@ -1,0 +1,13 @@
+- name: install apache2
+  apt:
+    name: apache2
+    state: present
+    update_cache: yes
+  notify:
+    - restart apache
+- name: install php
+  apt:
+    name: libapache2-mod-php
+    state: present
+  notify:
+    - restart apache

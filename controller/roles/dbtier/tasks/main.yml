@@ -1,0 +1,10 @@
+- name: install mysql-server
+  apt:
+    name: mysql-server
+    state: present
+    update_cache: yes
+- name: install mysql-client
+  apt:
+    name: mysql-client
+    state: present
+    update_cache: yes
